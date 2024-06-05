@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('Dashboard.User.Auth.signin');
     }
 
     /**
@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME); // this is the default redirect path after login 
     }
 
     /**
@@ -37,10 +37,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // in the following line we are logging out the user using the web guard which is the default guard in the config/auth.php
         Auth::guard('web')->logout();
-
+        // here we invalidate the session (killing the session data)
         $request->session()->invalidate();
-
+        // this makes sure that the session is regenerated after logout to be in the safe side
         $request->session()->regenerateToken();
 
         return redirect('/');

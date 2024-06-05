@@ -14,4 +14,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// this is the route for the dashboard which is protected by the auth middleware
+
 Route::get('/Dashboard_Admin',[DashboardController::class, 'index']);
+
+
+Route::get('/dashboard/user', function () {
+    return view('Dashboard.User.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard.user'); // using 'auth' in the middleware [laravel automatically get that this middleware is web middleware and it is defined in the RouteServiceProvider.php file in the boot method]
+
+require __DIR__.'/auth.php';
