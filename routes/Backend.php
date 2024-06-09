@@ -21,6 +21,10 @@ Route::get('/Dashboard_Admin',[DashboardController::class, 'index']);
 
 Route::get('/dashboard/user', function () {
     return view('Dashboard.User.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard.user'); // using 'auth' in the middleware [laravel automatically get that this middleware is web middleware and it is defined in the RouteServiceProvider.php file in the boot method]
+})->middleware(['auth'])->name('dashboard.user'); // using 'auth' in the middleware [laravel automatically get that this middleware is web middleware and it is defined in the RouteServiceProvider.php file in the boot method]
+
+Route::get('/dashboard/admin', function () {
+    return view('Dashboard.Admin.dashboard');
+})->middleware(['auth:admin'])->name('dashboard.admin');
 
 require __DIR__.'/auth.php';

@@ -25,11 +25,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        if($request->authenticate()){
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME); // this is the default redirect path after login 
+            return redirect()->route('dashboard.user');  
+        }
+        return back()->withErrors($request->errors());
+        // this is the default redirect path after login 
     }
 
     /**

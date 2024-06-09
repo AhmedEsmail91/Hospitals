@@ -1,7 +1,14 @@
 @extends('dashboard.layouts.master2')
 @section('css')
+<style>
+	.loginform{
+		display: none;
+	}
+
+</style>
 <!-- Sidemenu-respoansive-tabs css -->
 <link href="{{URL::asset('Dashboard/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
+
 @endsection
 @section('content')
 		<div class="container-fluid">
@@ -26,28 +33,82 @@
 										<div class="card-sigin">
 											<div class="main-signup-header">
 												<h2>Welcome back!</h2>
-												<h5 class="font-weight-semibold mb-4">Please sign in to continue.</h5>
-												<form method="post" action= "{{route('login.user')}}">
-													@csrf
-													<div class="form-group">
-														<label>Email</label> <input class="form-control" placeholder="Enter your email" type="email" name="email" :value="old('email')" required autofocus>
-													</div>
-													<div class="form-group">
-														<label>Password</label> <input class="form-control" placeholder="Enter your password" type="password" name="password" required autocomplete="current-password" >
-													</div><button class="btn btn-main-primary btn-block">Sign In</button>
-													<div class="row row-xs">
-														<div class="col-sm-6">
-															<button class="btn btn-block"><i class="fab fa-facebook-f"></i> Signup with Facebook</button>
+													@if ($errors->any())
+														<div class="alert alert-danger">
+															<ul>
+																@foreach ($errors->all() as $error)
+																	{{ $error }}
+																@endforeach
+															</ul>
 														</div>
-														<div class="col-sm-6 mg-t-10 mg-sm-t-0">
-															<button type="submit" class="btn btn-info btn-block"><i class="fab fa-twitter"></i> Signup with Twitter</button>
-														</div>
-													</div>
-												</form>
-												<div class="main-signin-footer mt-5">
-													<p><a href="">Forgot password?</a></p>
-													<p>Don't have an account? <a href="{{ url('/' . $page='signup') }}">Create an Account</a></p>
+													@endif
+												<!-- Roles -->
+												<div class="form-group">
+													<label for="ٌRoleSelection">Role selection</label>
+													<select class="form-control" id="ٌRoleSelection">
+													<option selected disabled>Choose From the Form</option>
+													<option>User</option>
+													<option>Admin</option>
+													<!-- <option>4</option>
+													<option>5</option> -->
+													</select>
 												</div>
+												
+
+												<!-- /Roles -->
+												 <!-- user_form -->
+												 <div class="loginform" id="user">
+													<h5 class="font-weight-semibold mb-4">Please sign in as User to continue.</h5>
+													<form method="post" action= "{{route('login.user')}}">
+														@csrf
+														<div class="form-group">
+															<label>Email</label> <input class="form-control" placeholder="Enter your email" type="email" name="email" :value="old('email')" required autofocus>
+														</div>
+														<div class="form-group">
+															<label>Password</label> <input class="form-control" placeholder="Enter your password" type="password" name="password" required autocomplete="current-password" >
+														</div><button class="btn btn-main-primary btn-block">Sign In</button>
+														<div class="row row-xs">
+															<div class="col-sm-6">
+																<button class="btn btn-block"><i class="fab fa-facebook-f"></i> Signup with Facebook</button>
+															</div>
+															<div class="col-sm-6 mg-t-10 mg-sm-t-0">
+																<button type="submit" class="btn btn-info btn-block"><i class="fab fa-twitter"></i> Signup with Twitter</button>
+															</div>
+														</div>
+													</form>
+													<div class="main-signin-footer mt-5">
+														<p><a href="">Forgot password?</a></p>
+														<p>Don't have an account? <a href="{{ url('/' . $page='signup') }}">Create an Account</a></p>
+													</div>
+												</div>
+												 <!-- /user_form -->
+
+												  <!-- admin_form -->
+												 <div class="loginform" id="admin">
+													<h5 class="font-weight-semibold mb-4">Please sign in as Admin to continue.</h5>
+													<form method="post" action= "{{route('login.admin')}}">
+														@csrf
+														<div class="form-group">
+															<label>Email</label> <input class="form-control" placeholder="Enter your email" type="email" name="email" :value="old('email')" required autofocus>
+														</div>
+														<div class="form-group">
+															<label>Password</label> <input class="form-control" placeholder="Enter your password" type="password" name="password" required autocomplete="current-password" >
+														</div><button class="btn btn-main-primary btn-block">Sign In</button>
+														<!-- <div class="row row-xs">
+															<div class="col-sm-6">
+																<button class="btn btn-block"><i class="fab fa-facebook-f"></i> Signup with Facebook</button>
+															</div>
+															<div class="col-sm-6 mg-t-10 mg-sm-t-0">
+																<button type="submit" class="btn btn-info btn-block"><i class="fab fa-twitter"></i> Signup with Twitter</button>
+															</div>
+														</div> -->
+													</form>
+													<div class="main-signin-footer mt-5">
+														<p><a href="">Forgot password?</a></p>
+														<!-- <p>Don't have an account? <a href="{{ url('/' . $page='signup') }}">Create an Account</a></p> -->
+													</div>
+												</div>
+												 <!-- /admin_form -->
 											</div>
 										</div>
 									</div>
@@ -60,4 +121,34 @@
 		</div>
 @endsection
 @section('js')
+	<script>
+		$(document).ready(function(){ // This is a jQuery method that ensures the code inside it only runs after the DOM (Document Object Model) is fully loaded. This is important because it guarantees that all HTML elements are available for manipulation by the script.
+			$('#ٌRoleSelection').change(function(){
+				var role = $(this).val(); // (this) word refers to the element that triggered the event(RoleSelection)
+				
+				if(role == 'User'){
+					$('#user').show();
+					$('#admin').hide();
+				}else if(role == 'Admin'){
+					$('#admin').show();
+					$('#user').hide();
+				}
+				else{
+					$('#user').hide();
+					$('#admin').hide();
+				}
+			});
+		});
+	</script>
+	<!-- 
+		$(document).ready(function(){...});: This is a jQuery method that ensures the code inside it only runs after the DOM (Document Object Model) is fully loaded. This is important because it guarantees that all HTML elements are available for manipulation by the script.
+
+		$('#ٌRoleFrom').change(function(){...});: This line attaches an event listener to an HTML element with the ID ٌRoleFrom, which is presumably a dropdown (<select>) element. The .change() method listens for any change in the selected option of the dropdown. When a change occurs, the anonymous function provided as an argument to .change() is executed.
+
+		var role = $(this).val();: Inside the change event listener, $(this) refers to the #ٌRoleFrom element that triggered the event. .val() gets the value of the currently selected option in the dropdown. This value is stored in the variable role, which is then used to determine which elements to show or hide.
+
+		The if statement checks the value of role. If role == 'Patient', it executes the code block that shows the HTML element with the ID user and hides the element with the ID admin. This is done using the jQuery .show() and .hide() methods, respectively.
+
+		Conversely, if role == 'Admin', the else if block is executed, showing the admin element and hiding the user element. 
+	-->
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -16,9 +17,16 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('/User/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+
+
+######################################## Routes for User ########################################
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login'); // the main route for the user login which takes the request and authenticate it using the AuthenticatedSessionController and then redirect to the dashboard which is spcified for the user role.
 
     Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login.user');
+
+######################################## Routes for Admin ########################################
+    // the route for the admin login which takes the request and authenticate it using the AdminLoginRequest and then redirect to the dashboard which is spcified for the admin role.
+    Route::post('/admin/login', [AdminController::class, 'store'])->name('login.admin');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -33,6 +41,10 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
 
+Route::middleware('auth:admin')->group(function () {
+    // Admin Routes
+    Route::post('/logout/admin', [AdminController::class, 'destroy'])->name('logout.admin');
+});
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
@@ -55,3 +67,4 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
+Route::view('/testing','Dashboard.404')->name('testing');
