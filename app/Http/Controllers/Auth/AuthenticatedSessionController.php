@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('Dashboard.User.Auth.signin');
+        return view('Dashboard.User.Auth.signin',['Session_Content'=>session()->all()]);
     }
 
     /**
@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
             return redirect()->route('dashboard.user');  
         }
-        return back()->withErrors($request->errors());
+        return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
         // this is the default redirect path after login 
     }
 

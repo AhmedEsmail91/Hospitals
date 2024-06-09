@@ -65,6 +65,5 @@ Route::middleware('auth')->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+                ->name('logout.user');
 });
-Route::view('/testing','Dashboard.404')->name('testing');

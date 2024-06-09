@@ -21,6 +21,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<!-- The content half -->
 				<div class="col-md-6 col-lg-6 col-xl-5 bg-white">
 					<div class="login d-flex align-items-center py-2">

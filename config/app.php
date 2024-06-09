@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar', // the default language for the application
 
     /*
     |--------------------------------------------------------------------------
