@@ -29,7 +29,7 @@ Route::group(
             - SessionRedirect => Redirect the user to the correct locale based on the session locale
             [if i closed the dashboard in the arabic language and then i open it again it will open in the arabic language].
             - localizationRedirect => Redirect the user to the correct locale based on the browser locale.
-            - localeViewPath => Set the locale view path to the current locale.
+            - localeViewPath => Set the locale view path to the current locale e.i.[resources/views/es/welcome.blade.php] incase of having view for each language.
         */
     ], function(){ 
         Route::get('/dashboard/user', function () {
