@@ -46,6 +46,6 @@ class AuthenticatedSessionController extends Controller
         // this makes sure that the session is regenerated after logout to be in the safe side
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login');
     }
 }

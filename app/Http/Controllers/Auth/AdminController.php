@@ -30,7 +30,7 @@ class AdminController extends Controller
         if($request->authenticate()){
             $request->session()->regenerate();
 
-            return redirect()->route('dashboard.admin');  
+            return redirect()->intended(RouteServiceProvider::ADMIN);  
         }
         return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
     }
@@ -66,6 +66,6 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        return back();
+        return redirect()->route('login');
     }
 }

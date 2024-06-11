@@ -12,6 +12,43 @@
 @endsection
 
 @section('content')
+				<div class="main-header-center ml-2">
+							<ul class="nav">
+								<li class="">
+									<div class="dropdown  nav-itemd-none d-md-flex">
+										<a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown"
+										aria-expanded="false">
+											@if (App::getLocale() == 'ar')
+												<span class="avatar country-Flag mr-0 align-self-center bg-transparent">
+													<i class="flag-icon flag-icon-eg"></i>
+												</span>
+												<strong
+													class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+											@else
+												<span class="avatar country-Flag mr-0 align-self-center bg-transparent"><i class="flag-icon flag-icon-us"></i></span>
+												<strong
+													class="mr-2 ml-2 my-auto">{{ LaravelLocalization::getCurrentLocaleName() }}</strong>
+											@endif
+											<div class="my-auto">
+											</div>
+										</a>
+										<div class="dropdown-menu dropdown-menu-{{App::getLocale()=="ar"?"left":"right"}} " x-placement="bottom-end">
+											@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+												<a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
+												href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+													@if($properties['native'] == "English")
+														<i class="flag-icon flag-icon-us"></i>
+													@elseif($properties['native'] == "العربية")
+														<i class="flag-icon flag-icon-eg"></i>
+													@endif
+													{{ $properties['native'] }}
+												</a>
+											@endforeach
+										</div>
+									</div>
+								</li>
+           					</ul>
+							</div>
 		<div class="container-fluid">
 			<div class="row no-gutter">
 				<!-- The image half -->
@@ -34,7 +71,7 @@
 										<div class="mb-5 d-flex"> <a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('Dashboard/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Va<span>le</span>x</h1></div>
 										<div class="card-sigin">
 											<div class="main-signup-header">
-												<h2>Welcome back!</h2>
+												<h2>{{trans('Dashboard/login_trans.welcome_back')}}</h2>
 													@if ($errors->any())
 														<div class="alert alert-danger">
 															<ul>
@@ -46,9 +83,9 @@
 													@endif
 												<!-- Roles -->
 												<div class="form-group">
-													<label for="ٌRoleSelection">Role selection</label>
+													<label for="ٌRoleSelection">{{trans('Dashboard/login_trans.role_selection')}}</label>
 													<select class="form-control" id="ٌRoleSelection">
-													<option selected disabled>Choose From the Form</option>
+													<option selected disabled>{{trans('Dashboard/login_trans.user_role_chooser')}}</option>
 													<option>User</option>
 													<option>Admin</option>
 													<!-- <option>4</option>

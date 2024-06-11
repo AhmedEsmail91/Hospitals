@@ -1,5 +1,5 @@
 <!-- main-header opened -->
-			<div class="main-header sticky side-header nav nav-item">
+ 			<div class="main-header sticky side-header nav nav-item">
 				<div class="container-fluid">
 					<div class="main-header-left ">
 						<div class="responsive-logo">
@@ -52,6 +52,7 @@
 									</div>
 								</li>
            					</ul>
+						<!-- </div> -->
 						<div class="nav nav-item  navbar-nav-right ml-auto">
 							<div class="nav-link" id="bs-example-navbar-collapse-1">
 								<form class="navbar-form" role="search">
