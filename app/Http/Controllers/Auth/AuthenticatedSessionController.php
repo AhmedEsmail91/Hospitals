@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
             return redirect()->route('dashboard.user');  
         }
-        return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
+        return back()->withErrors(['error' => trans('Dashboard/auth.failed')]);
         // this is the default redirect path after login 
     }
 

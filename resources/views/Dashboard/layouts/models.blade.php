@@ -10,7 +10,7 @@
 									<img src="{{URL::asset('Dashboard/img/faces/6.jpg')}}" class="rounded-circle user_img" alt="img">
 								</div>
 								<div class="align-items-center mt-2">
-									<h4 class="text-white mb-0 font-weight-semibold">Daneil Scott</h4>
+									<h4 class="text-white mb-0 font-weight-semibold">DaneilI'm done. Let's say this boy actually Scott</h4>
 									<span class="dot-label bg-success"></span><span class="mr-3 text-white">online</span>
 								</div>
 							</div>

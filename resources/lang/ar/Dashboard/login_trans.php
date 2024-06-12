@@ -1,8 +1,15 @@
 <?php
-return[
-    'welcome_back'=>'مرحبا بك مجددا!',
-    'user_role_chooser'=> 'اختر لتسجيل الدخول',
-    'user_role'=>'مستخدم',
-    'admin_role'=>'مدير',
-    'role_selection'=>'اختيار الدور',
+
+return [
+
+     'Welcome' =>'مرحبا بعودتك مرة اخري',
+    'Select_Enter' =>'حدد طريقة الدخول ',
+    'Choose_list' =>'اختار من القائمة',
+    'user' =>'مريض',
+    'admin' =>' ادمن',
+    'doctor' =>' كطبيب',
+    'x-ray'=> ' كموضف اشعة',
+    'lab' =>' كمعمل تحاليل',
+
+
 ];

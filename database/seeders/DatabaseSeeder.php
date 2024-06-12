@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use \App\Models\User;
+use Database\Factories\UserCountFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AdminSeeder::class,
         ]);
+        // $this->call(UserCountSeeder::class);
         
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,13 +16,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(1)->create(
-            [
-                'name' => 'Ahmed User',
-                'email' => 'user@yahoo.com',
-                'password' => Hash::make('12345678'),
-            ]
-        );
-        \App\Models\User::factory(10)->create();
+        $main_user=['name'=>'Ahmed Admin','email'=>'ahmed@yahoo.com','password'=>Hash::make('12345678')];
+        if(!in_array($main_user['email'], \App\Models\User::select('email')->pluck('email')->toArray())){
+            \App\Models\User::create($main_user);
+        }
+        \App\Models\User::factory(random_int(1,6))->create();
     }
 }

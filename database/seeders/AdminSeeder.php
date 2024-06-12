@@ -13,11 +13,10 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Admin::factory(1)->create(
-            [
-                'name' => 'Ahmed Admin',
-                'email' => 'admin@yahoo.com',
-                'password' => Hash::make('12345678'),
-            ]);
+        $main_user=['name'=>'Ahmed Admin','email'=>'ahmed@yahoo.com','password'=>Hash::make('12345678')];
+        if(!in_array($main_user['email'], \App\Models\Admin::select('email')->pluck('email')->toArray())){
+            \App\Models\Admin::create($main_user);
+        }
+        \App\Models\Admin::factory(random_int(1,10))->create();
     }
 }

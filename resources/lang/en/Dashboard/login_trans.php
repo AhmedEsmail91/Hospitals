@@ -1,8 +1,14 @@
 <?php
-return[
-    'welcome_back'=>'Welcome Back!',
-    'user_role_chooser'=> 'Choose your role to login',
-    'user_role'=>'User',
-    'admin_role'=>'Admin',
-    'role_selection'=>'Role Selection',
+
+return [
+
+    'Welcome' =>'Welcome back',
+    'Select_Enter' =>'Select the entry method',
+    'Choose_list' =>'Choose from the list',
+    'user' =>'Patient',
+    'admin' =>'Admin',
+    'doctor' =>'Doctor',
+    'x-ray'=> 'X-ray Employee',
+    'lab' =>'Lab. Employee',
+
 ];

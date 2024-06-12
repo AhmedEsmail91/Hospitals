@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use \App\Http\Requests\Auth\AdminLoginRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class AdminController extends Controller
         if($request->authenticate()){
             $request->session()->regenerate();
 
-            return redirect()->intended(RouteServiceProvider::ADMIN);  
+            return redirect()->intended(RouteServiceProvider::ADMIN)->with('data_count', 'asdasd');
         }
         return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
     }
