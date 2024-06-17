@@ -2,34 +2,63 @@
 namespace App\Repository\Sections;
 
 use App\Interfaces\Sections\SectionRepositoryInterface;
-use Illuminate\Support\Facades\Request;
+use App\Models\Models\Section;
 
 class SectionRepository implements SectionRepositoryInterface
 {
+
     public function index()
     {
-        // return all sections
-        return 'All sections';
+      $sections = Section::all();
+      return view('Dashboard.Sections.index',compact('sections'));
     }
 
-    public function create()
+    public function store($request)
     {
-        // create a new section
-        
+        Section::create([
+            'name' => $request->input('name'),
+        ]);
+
+        session()->flash('add');
+        return redirect()->route('Sections.index');
     }
 
-    public function update(array $data, $id)
+    public function update($request)
     {
-        // update a section
+        $section = Section::findOrFail($request->id);
+        $section->update([
+            'name' => $request->input('name'),
+        ]);
+        session()->flash('edit');
+        return redirect()->route('Sections.index');
     }
 
-    public function delete($id)
+
+    public function destroy($request)
     {
-        // delete a section
+        Section::findOrFail($request->id)->delete();
+        session()->flash('delete');
+        return redirect()->route('Sections.index');
     }
 
     public function show($id)
     {
-        // show a section
+        $doctors =Section::findOrFail($id)->doctors;
+        $section = Section::findOrFail($id);
+        return view('Dashboard.Sections.show_doctors',compact('doctors','section'));
     }
+
 }
+// to make session for sweet alert which is called in the index page and implemented as following 
+        /*
+        @if (session()->has('add'))
+            <script>
+                window.onload = function() {
+                    notif({
+                        msg: "{{ trans('Dashboard/messages.add') }}",
+                        type: "success"
+                    });
+                }
+            </script>
+        @endif
+         */

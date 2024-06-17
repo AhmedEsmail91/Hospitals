@@ -50,5 +50,7 @@ Route::group(
         });
         require __DIR__.'/auth.php';
     });
-
+Route::get('/testing_route', function () {
+    return view('Dashboard.Sections.index');
+})->name('testing_route');
 
