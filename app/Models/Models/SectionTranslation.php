@@ -10,5 +10,5 @@ class SectionTranslation extends Model
     use HasFactory;
     // protected $fillable = ['title', 'full_text'];
     protected $fillable = ['name'];
-    public $timestamps = false;
+    public $timestamps = false; // To disable timestamps cause we don't have it in this table [not needed].
 }

@@ -66,7 +66,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$Current_Users_Num}}</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$Current_Users_Num}} <img src="\Dashboard\img\profile_icon.png" alt="admin_icon" class="wd-15"></h4>
 											<p class="mb-0 tx-20 text-white op-7">Compared to last week</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -101,7 +101,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$Current_Users_Num_admins}}</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{$Current_Users_Num_admins}} <img src="\Dashboard\img\profile_icon.png" alt="admin_icon" class="wd-15"></h4>
 											<p class="mb-0 tx-20 text-white op-7">Compared to last week</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -111,6 +111,7 @@
 									</div>
 								</div>
 							</div>
+							
 							<span id="compositeline2" class="pt-1">
 							@for ($i = $Conditional_count; $i >0; $i--)
 								@if ($i==1)
@@ -120,6 +121,7 @@
 								@endif
 							@endfor
 							</span>
+							
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">

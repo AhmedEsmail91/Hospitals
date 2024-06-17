@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -32,14 +33,21 @@ Route::group(
             - localeViewPath => Set the locale view path to the current locale e.i.[resources/views/es/welcome.blade.php] incase of having view for each language.
         */
     ], function(){ 
+        ################################################## Dashboard User ##################################################
         Route::get('/dashboard/user', function () {
             return view('Dashboard.User.dashboard');
         })->middleware(['auth'])->name('dashboard.user'); // using 'auth' in the middleware [laravel automatically get that this middleware is web middleware and it is defined in the RouteServiceProvider.php file in the boot method]
-        
+        ################################################## /End Dashboard User ##################################################
+
+        ################################################## Dashboard Admin ##################################################
         Route::get('/dashboard/admin', function () {
             return view('Dashboard.Admin.dashboard');
         })->middleware(['auth:admin'])->name('dashboard.admin');
-        
+        ################################################## /End Dashboard Admin ##################################################
+        //------------------------------------------------------------------------------------------------------------------------
+        Route::middleware('auth:admin')->group(function(){
+            Route::resource('Sections', SectionController::class);
+        });
         require __DIR__.'/auth.php';
     });
 
