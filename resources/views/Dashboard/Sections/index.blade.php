@@ -20,7 +20,7 @@
 				<!-- breadcrumb -->
 @endsection
 @section('content')
-@include('Dashboard.messages_alert')
+@include('Dashboard.message_alert')
 				<!-- row -->
                     <!-- row opened -->
                     <div class="row row-sm">
