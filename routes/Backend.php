@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DoctorController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::group(
         //------------------------------------------------------------------------------------------------------------------------
         Route::middleware('auth:admin')->group(function(){
             Route::resource('Sections', SectionController::class);
+        });
+        Route::middleware('auth:admin')->group(function(){
+            Route::resource('Doctors', DoctorController::class);
         });
         require __DIR__.'/auth.php';
     });

@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $main_user=['name'=>'Ahmed Admin','email'=>'ahmed@yahoo.com','password'=>Hash::make('12345678')];
+        $main_user=['name'=>'Ahmed User','email'=>'ahmed@yahoo.com','password'=>Hash::make('12345678')];
         if(!in_array($main_user['email'], \App\Models\User::select('email')->pluck('email')->toArray())){
             \App\Models\User::create($main_user);
         }

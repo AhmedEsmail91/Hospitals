@@ -46,4 +46,8 @@ class User extends Authenticatable
     // {
     //     return $this->hasMany(Admin::class);
     // }
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

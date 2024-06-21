@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Models;
+namespace App\Models;
 
 use Astrotomic\Translatable\Translatable;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -14,4 +14,8 @@ class Section extends Model
     protected $fillable = ['name'];
     // 3. To define which attributes needs to be translated
     public $translatedAttributes = ['name']; // what we need to translate in the Section model.
+    public function doctors()
+    {
+        return $this->hasMany('App\Models\Models\Doctor');
+    }
 }

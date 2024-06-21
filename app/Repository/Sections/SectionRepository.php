@@ -2,7 +2,7 @@
 namespace App\Repository\Sections;
 
 use App\Interfaces\Sections\SectionRepositoryInterface;
-use App\Models\Models\Section;
+use App\Models\Section;
 
 class SectionRepository implements SectionRepositoryInterface
 {
@@ -43,8 +43,9 @@ class SectionRepository implements SectionRepositoryInterface
 
     public function show($id)
     {
-        $doctors =Section::findOrFail($id)->doctors;
+        Section::findOrFail($id)->doctors;
         $section = Section::findOrFail($id);
+        // $doctors =$section->load('doctors');
         return view('Dashboard.Sections.show_doctors',compact('doctors','section'));
     }
 

@@ -1,0 +1,32 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Doctor>
+ */
+class DoctorFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name,
+            'appointments' => $this->faker->randomElement(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']),
+            
+            'email' => $this->faker->unique()->safeEmail,
+            'email_verified_at' => now(), //**To avoid 'email_verified_at' column error**//
+            'password' => Hash::make('password123'),
+            'phone' => $this->faker->phoneNumber,
+            'price' => $this->faker->randomElement([100, 200, 300, 400, 500]),
+            
+        ];
+    }
+}
