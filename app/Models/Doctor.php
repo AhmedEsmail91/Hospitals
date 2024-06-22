@@ -12,7 +12,7 @@ class Doctor extends Model
     Translatable; //**To add translation methods**//
     
     public $translatedAttributes = ['name', 'appointments'];
-    protected $fillable = ['email','email_verified_at','password','phone','price','name','appointments'];
+    protected $fillable = ['email','email_verified_at','password','phone','price','name','appointments','status','section_id'];
     /**
      * Get the doctor's image.
      */

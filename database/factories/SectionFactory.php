@@ -17,9 +17,16 @@ class SectionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->sentence(1),
-            // 'description' => $this->faker->text,
-            // 'image' => $this->faker->imageUrl(),
+            'name' => $this->faker->randomElement([
+                "Surgery",
+                "General Surgery",
+                "Cardiothoracic Surgery",
+                "Neurosurgery",
+                "Orthopedic Surgery",
+                "Plastic Surgery",
+                "Vascular Surgery",
+                "Urologic Surgery",
+                "Internal Medicine"])
         ];
     }
 }

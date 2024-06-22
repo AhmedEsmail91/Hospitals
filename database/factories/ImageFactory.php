@@ -19,7 +19,7 @@ class ImageFactory extends Factory
     public function definition(): array
     {
         return [
-            'filename' => $this->faker->imageUrl(),
+            'filename' => 'https://via.placeholder.com/100x100/0f0f0f',
             'imageable_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
             'imageable_type' => $this->faker->randomElement(['App\Models\Doctor','App\Models\User']), // the image is associated with a doctor model
 

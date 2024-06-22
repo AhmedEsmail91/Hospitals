@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('user_counts', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name')->nullable();
-        //     $table->integer('count');
-        //     $table->timestamps();
-        // });
+        Schema::create('user_counts', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->nullable();
+            $table->integer('count');
+            $table->timestamps();
+        });
     }
 
     /**

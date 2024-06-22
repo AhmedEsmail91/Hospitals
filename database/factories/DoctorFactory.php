@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +21,8 @@ class DoctorFactory extends Factory
         return [
             'name' => $this->faker->name,
             'appointments' => $this->faker->randomElement(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']),
-            
+            'status' => $this->faker->boolean, //**To avoid 'status' column error**//
+            'section_id' => Section::all()->random()->id,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(), //**To avoid 'email_verified_at' column error**//
             'password' => Hash::make('password123'),
