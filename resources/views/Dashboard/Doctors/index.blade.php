@@ -29,7 +29,7 @@
                                 <div class="card-header pb-0">
                                     <div class="d-flex justify-content-between">
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">
-                                            {{trans('Dashboard/sections_trans.add_sections')}}
+                                            Add Doctor
                                         </button>
                                     </div>
                                 </div>
@@ -39,8 +39,9 @@
                                             <thead>
                                             <tr>
                                                 <th class="wd-15p border-bottom-0">#</th>
-                                                <th class="wd-15p border-bottom-0">{{trans('Dashboard/sections_trans.name_sections')}}</th>
+                                                <th class="wd-15p border-bottom-0">{{trans('Dashboard/sections_trans.name')}}</th>
                                                 <!-- <th class="wd-15p border-bottom-0">{{trans('Dashboard/sections_trans.description')}}</th> -->
+                                                <th class="wd-20p border-bottom-0">{{trans('Dashboard/sections_trans.name_sections')}}</th>
                                                 <th class="wd-20p border-bottom-0">{{trans('Dashboard/sections_trans.created_at')}}</th>
                                                 <th class="wd-20p border-bottom-0">{{trans('Dashboard/sections_trans.Processes')}}</th>
                                             </tr>
@@ -51,14 +52,17 @@
                                                    <td>{{$loop->iteration}}</td> {{-- loop for making indexing --}}
                                                    <td><a href="{{route('Doctors.show',$doctor->id)}}">{{$doctor->name}}</a> </td>
                                                    <!-- <td>{{ \Str::limit($doctor->description, 50) }}</td> -->
+                                                   <td>{{ $doctor->section($doctor->section_id)}}</td>
                                                    <td>{{ $doctor->created_at->diffForHumans() }}</td> <!--diffForHumans() to show the time in a human readable format-->
                                                    <td>
-                                                       <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit{{$doctor->id}}"><i class="las la-pen"></i></a>
+                                                       <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"  data-toggle="modal" href="#edit{{$doctor->id}}">{{$doctor->id}}<i class="las la-pen"></i></a>
                                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"  data-toggle="modal" href="#delete{{$doctor->id}}"><i class="las la-trash"></i></a>
                                                    </td>
                                                </tr>
+                                               @include('Dashboard.Doctors.edit')
+                                               @include('Dashboard.Doctors.delete')
 
-
+                                                  
                                            @endforeach
                                             </tbody>
                                         </table>
@@ -67,11 +71,9 @@
                             </div><!-- bd -->
                         </div>
                         <!--/div-->
+                    @include('Dashboard.Doctors.add',['sections'=>$sections,'appointments'=>$appointments])
                     
-                    @include('Dashboard.Doctors.add')
-                    <!-- /row -->
-                    @include('Dashboard.Doctors.edit')
-                    @include('Dashboard.Doctors.delete')
+
 				</div>
 				<!-- row closed -->
 

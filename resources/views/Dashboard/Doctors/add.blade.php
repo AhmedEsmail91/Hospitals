@@ -8,11 +8,27 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('Doctros.store') }}" method="post" autocomplete="off">
+            <form action="{{ route('Doctors.store') }}" method="post" autocomplete="off">
                 @csrf
                 <div class="modal-body">
-                    <label for="exampleInputPassword1">{{trans('Dashboard/sections_trans.name_sections')}}</label>
-                    <input type="text" name="name" class="form-control">
+                    <label for="DoctorName">Doctor Name</label>
+                    <input type="text" name="name" class="form-control" id="DoctorName">
+
+                    <label for=""></label>
+                    <select name="section_id" id="sections" class="form-control">
+                        <option value="#" disabled selected>Choose Section</option>
+                        @foreach ($sections as $section)
+                            <option value="{{ $section->id }}">{{ $section->name }}</option>
+                        @endforeach
+                    </select>
+
+                    <label for=""></label>
+                    <select name="appointments" id="appointments" class="form-control">
+                        <option value="#" disabled selected>Choose Day</option>
+                        @foreach ($appointments as $key=>$appointment)
+                            <option value="{{ $appointment }}">{{ $appointment }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('Dashboard/sections_trans.Close')}}</button>

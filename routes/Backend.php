@@ -50,7 +50,7 @@ Route::group(
             Route::resource('Sections', SectionController::class);
         });
         Route::middleware('auth:admin')->group(function(){
-            Route::resource('Doctors', DoctorController::class);
+            Route::resource('Doctors', DoctorController::class)->except('edit');
         });
         require __DIR__.'/auth.php';
     });

@@ -20,5 +20,8 @@ class Doctor extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+    public function section($id){
+        return Section::findOrFail($id)->name;
+    }
     
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\Doctors\DoctorRepositoryInterface;
 use App\Models\Doctor;
+use App\Repository\Doctors\DoctorRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -11,10 +14,16 @@ class DoctorController extends Controller
     /**
      * Display a listing of the resource.
      */
+    private $Doctors;
+
+    public function __construct(DoctorRepositoryInterface $Doctors)
+    {
+        $this->Doctors = $Doctors;
+    }
     public function index()
     {
-        $doctor = Doctor::find(5);
-        dd($doctor->image->filename);
+        return $this->Doctors->index();
+        // return 'Hello World';
     }
 
     /**
@@ -30,7 +39,7 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->Doctors->store($request);
     }
 
     /**
@@ -43,26 +52,19 @@ class DoctorController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $this->Doctors->update($request);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $this->Doctors->destroy($request);
+        return redirect()->route("Doctors.index");
     }
 }
