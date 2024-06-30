@@ -16,6 +16,6 @@ class Section extends Model
     public $translatedAttributes = ['name']; // what we need to translate in the Section model.
     public function doctors()
     {
-        return $this->hasMany('App\Models\Models\Doctor');
+        return $this->hasMany(Doctor::class);
     }
 }

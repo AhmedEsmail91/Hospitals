@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\Doctors\DoctorRepositoryInterface;
 use App\Models\Doctor;
+use App\Repository\Doctors\DoctorRepository;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -11,10 +13,15 @@ class DoctorController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
+    
+    public function __construct(protected DoctorRepositoryInterface $Doctors){
+        
+    }
     public function index()
     {
-        $doctor = Doctor::find(5);
-        dd($doctor->image->filename);
+        return $this->Doctors->index();
+
     }
 
     /**
@@ -23,6 +30,7 @@ class DoctorController extends Controller
     public function create()
     {
         //
+        return $this->Doctors->create();
     }
 
     /**

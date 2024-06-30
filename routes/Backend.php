@@ -48,13 +48,24 @@ Route::group(
         //------------------------------------------------------------------------------------------------------------------------
         Route::middleware('auth:admin')->group(function(){
             Route::resource('Sections', SectionController::class);
+            Route::get('/testing_route', function () {
+                return view('Dashboard.table-basic');
+            })->name('testing_route');
+                    
+        Route::get('/list-dashboard-views', function () {
+            $viewFiles = glob(resource_path('views/Dashboard/*.blade.php'));
+            $views = [];
+            foreach ($viewFiles as $viewFile) {
+                $views[] = '<pre>Dashboard.'.str_replace('.blade.php', '', basename($viewFile)).'</pre>';
+                 
+            }
+            return print_r($views);
+            });
         });
         Route::middleware('auth:admin')->group(function(){
             Route::resource('Doctors', DoctorController::class);
         });
         require __DIR__.'/auth.php';
     });
-Route::get('/testing_route', function () {
-    return view('Dashboard.Sections.index');
-})->name('testing_route');
+
 

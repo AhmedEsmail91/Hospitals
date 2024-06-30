@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Providers;
-
-use App\Interfaces\Sections\SectionRepositoryInterface;
-use App\Repository\Sections\SectionRepository;
 use Illuminate\Support\ServiceProvider;
+//Interfaces:
+use App\Interfaces\Sections\SectionRepositoryInterface;
+use App\Interfaces\Doctors\DoctorRepositoryInterface;
+//Repositories:
+use App\Repository\Doctors\DoctorRepository;
+use App\Repository\Sections\SectionRepository;
+
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -15,6 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         //
         $this->app->bind(SectionRepositoryInterface::class, SectionRepository::class); // bind the interface to the repository which implements it
+        $this->app->bind(DoctorRepositoryInterface::class, DoctorRepository::class); // bind the interface to the repository which implements it
         
     }
 
