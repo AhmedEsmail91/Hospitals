@@ -3,26 +3,29 @@
 namespace Database\Factories;
 
 use App\Models\Doctor;
-use App\Models\User;
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
- */
 class ImageFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Image::class;
+
+    /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'filename' => 'https://via.placeholder.com/100x100/0f0f0f',
-            'imageable_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
-            'imageable_type' => $this->faker->randomElement(['App\Models\Doctor','App\Models\User']), // the image is associated with a doctor model
-
+            'filename' =>  $this->faker->randomElement(['1.jpg', '2.jpg', '3.jpg', '4.jpg']),
+            'imageable_id' => Doctor::all()->random()->id,
+            'imageable_type' => 'App\Models\Doctor',
         ];
     }
 }

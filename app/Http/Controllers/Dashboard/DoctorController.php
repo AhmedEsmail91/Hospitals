@@ -39,6 +39,13 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         //
+        if (!$this->Doctors->store($request)) {
+            session()->flash('error', 'Something went wrong');
+            return redirect()->back();
+        }
+        else{
+            return redirect()->route('Doctors.index');
+        }
     }
 
     /**

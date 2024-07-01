@@ -3,52 +3,65 @@ namespace App\Repository\Doctors;
 use App\Interfaces\Doctors\DoctorRepositoryInterface;
 use App\Models\Doctor;
 use App\Models\Section;
+use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DoctorRepository implements DoctorRepositoryInterface{
+    use UploadTrait;
     public function index(){
         $doctors = Doctor::all();
         return view('Dashboard.Doctors.index',compact('doctors'));
     }
     public function create(){
-        $appointments=DB::table('appointments')->get();
-        return view('Dashboard.Doctors.add',['sections' => Section::all(),'appointments'=>$appointments]);
+        $sections = Section::all();
+        return view('Dashboard.Doctors.add',compact('sections'));
     }
     public function store($request){
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:doctors',// make sure that the email is unique in the doctors table
-            'password' => 'required|string|min:8',
-            'phone' => 'required|string|max:255',
-            'section_id' => 'required|exists:sections,id', // make sure that the section_id exists in the sections table
-        ]);
-        Doctor::create([
-            'name' => $request->input('name'),
-            'email'=> $request->input('email'),
-            'password'=> Hash::make($request->input('password')),
-            'phone'=> $request->input('phone'),
-            'section_id' => $request->input('section_id'),
-        ]);
-        session()->flash('add');
-        return redirect()->route('Doctors.index');
+        DB::beginTransaction();
+
+        try {
+
+            $doctors = new Doctor();
+            $doctors->email = $request->email;
+            $doctors->password = Hash::make($request->password);
+            $doctors->section_id = $request->section_id;
+            $doctors->phone = $request->phone;
+            $doctors->price = $request->price;
+            $doctors->status = 1;
+            $doctors->save();
+            // store trans
+            $doctors->name = $request->name;
+            $doctors->appointments =implode(",",$request->appointments);
+            $doctors->save();
+
+
+            //Upload img
+            $this->verifyAndStoreImage($request,'photo','doctors','upload_image',$doctors->id,'App\Models\Doctor');
+
+            DB::commit();
+            session()->flash('add');
+            return redirect()->route('Doctors.create');
+
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+
     }
     public function update($request){
-        $doctor = Doctor::findOrFail($request->id);
-        $doctor->update([
+        $section = Section::findOrFail($request->id);
+        $section->update([
             'name' => $request->input('name'),
-            'section_id' => $request->input('section_id'),
         ]);
         session()->flash('edit');
-        return redirect()->route('Doctors.index');
+        return redirect()->route('Sections.index');
     }
     public function destroy($request){
-        Doctor::findOrFail($request->id)->delete();
+        Section::findOrFail($request->id)->delete();
         session()->flash('delete');
-        return redirect()->route('Doctors.index');
+        return redirect()->route('Sections.index');
     }
-    public function show($id){
-        $doctor = Doctor::findOrFail($id);
-        return view('Dashboard.Doctors.show',compact('doctor'));
-    }
+
 }

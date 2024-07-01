@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'يوجد خطا في البريد الالكتروني او كلمة المرور',
-    'password' => 'كلمة المرور غير صحيحة',
-    'throttle' => ' لقد قمت بمحاولات تسجيل الدخول كثيرة جدا. يرجى المحاولة مرة أخرى في :seconds ثانية.',
+    'password' => 'The provided password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

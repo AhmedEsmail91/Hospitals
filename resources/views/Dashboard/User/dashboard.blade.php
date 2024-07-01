@@ -1,4 +1,4 @@
-@extends('Dashboard.layouts.master',['logout_role' => 'logout'])
+@extends('Dashboard.layouts.master')
 @section('css')
 <!--  Owl-carousel css-->
 <link href="{{URL::asset('Dashboard/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
@@ -10,7 +10,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome <u><b>{{trans('Dashboard/login_trans.user')}}</b></u></h2>
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">welcome user</h2>
 						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
 						</div>
 					</div>
@@ -459,5 +459,5 @@
 <script src="{{URL::asset('Dashboard/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->
 <script src="{{URL::asset('Dashboard/js/index.js')}}"></script>
-<script src="{{URL::asset('Dashboard/js/jquery.vmap.sampledata.js')}}"></script>	
+<script src="{{URL::asset('Dashboard/js/jquery.vmap.sampledata.js')}}"></script>
 @endsection

@@ -2,29 +2,30 @@
 
 namespace App\Models;
 
-use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Translatable;
 
 class Doctor extends Model
 {
-    use HasFactory,
-    Translatable; //**To add translation methods**//
-    
-    public $translatedAttributes = ['name', 'appointments'];
-    protected $fillable = ['email','email_verified_at','password','phone','price','name','appointments','status','section_id'];
+    use Translatable;
+    use HasFactory;
+    public $translatedAttributes = ['name','appointments'];
+    public $fillable= ['email','email_verified_at','password','phone','price','name','appointments','section_id'];
+    //protected $guarded=[];
+
     /**
-     * Get the doctor's image.
+     * Get the Doctor's image.
      */
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
     }
-    /**
-     * Get the doctor's section.
-     */
+
+    // One To One get section of Doctor
     public function section()
     {
         return $this->belongsTo(Section::class);
     }
+
 }

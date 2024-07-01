@@ -9,8 +9,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('Sections.update',$section->id) }}" method="POST">
-                @method('PATCH')
+            <form action="{{ route('Sections.update', 'test') }}" method="post">
+                {{ method_field('patch') }}
+                {{ csrf_field() }}
                 @csrf
                 <div class="modal-body">
                     <label for="exampleInputPassword1">{{trans('Dashboard/sections_trans.name_sections')}}</label>

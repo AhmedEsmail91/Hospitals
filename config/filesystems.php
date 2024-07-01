@@ -35,10 +35,17 @@ return [
             'root' => storage_path('app'),
             'throw' => false,
         ],
+        'upload_image'=> [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images'),
+            'url' => env('APP_URL').'/storage/images',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('Dashboard/img'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
             'throw' => false,

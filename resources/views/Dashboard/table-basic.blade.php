@@ -1,4 +1,4 @@
-@extends('Dashboard.layouts.master')
+@extends('layouts.master')
 @section('css')
 @endsection
 @section('page-header')
