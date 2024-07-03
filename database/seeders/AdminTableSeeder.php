@@ -16,11 +16,12 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->delete();
+        // DB::table('admins')->delete();
         DB::table('admins')->insert([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
+            'name' => 'Ahmed Admin',
+            'email' => 'ahmed@yahoo.com',
             'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
         ]);
     }
 }
